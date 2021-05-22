@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Counter } from "./components/Counter";
 
-function App() {
+import { Step } from "./components/Step/Step";
+import { createStore, SlomuxProvider } from "./lib/slomux";
+import { rootReducer } from "./reducers";
+
+const store = createStore(rootReducer);
+
+const profillerCallback = (
+  id,
+  phase,
+  actualTime,
+  baseTime,
+  startTime,
+  commitTime
+) => {
+  console.log(`${id}'s ${phase} phase:`);
+  console.log(`Actual time: ${actualTime}`);
+  console.log(`Base time: ${baseTime}`);
+  console.log(`Start time: ${startTime}`);
+  console.log(`Commit time: ${commitTime}`);
+};
+export const App = () => {
+  const [isVisible, setIsvisible] = useState(true);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    // <SlomuxProvider store={store}>
+    //   <Profiler id="StepComponent" onRender={profillerCallback}>
+    //     <Step />
+    //   </Profiler>
+    //   <Profiler id="CounterComponent" onRender={profillerCallback}>
+    //     <Counter />
+    //   </Profiler>
+    // </SlomuxProvider>
 
-export default App;
+    <SlomuxProvider store={store}>
+      <button onClick={() => setIsvisible(!isVisible)}>
+        show/hide counter
+      </button>
+      <Step />
+      {isVisible && <Counter />}
+
+      <br />
+    </SlomuxProvider>
+  );
+};
