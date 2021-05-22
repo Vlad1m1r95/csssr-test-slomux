@@ -28,7 +28,6 @@ export const useSelector = (
           const isCompare = compareCallback(newStore, previousStore);
           if (!isCompare) setState(newState);
           if (isCompare) {
-            console.log("не надо рендерить", selectorId);
             if (newState !== state) setState(selector(newStore));
           }
         } else {

@@ -1,4 +1,4 @@
-const stylesConsoleLog = "background: #222; color: #bada55; font-size: 18px;";
+const stylesConsoleLog = "background: #225; color: #bada55; font-size: 18px;";
 
 export const createStore = (reducer) => {
   let currentState = reducer.initialStore;
@@ -6,7 +6,6 @@ export const createStore = (reducer) => {
   let listeners = [];
 
   const dispatch = ({ type = "default", payload }) => {
-    console.log(getState());
     console.log(`%c ✔ SlomuxAction: ${type}`, stylesConsoleLog);
     console.log(
       `%c ✔ Subscribers: ${JSON.stringify(listeners)}`,

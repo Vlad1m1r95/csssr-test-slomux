@@ -7,13 +7,10 @@ import { useSelector, useDispatch, compareEqual } from "../../lib/slomux";
 export const Counter = (props) => {
   const stepSize = useSelector(
     (state) => Number(state.stepSize),
-    (current, prev) => null,
+    null,
     "Counter"
   );
   const counter = useSelector((state) => state.counter, null, "Counter");
-
-  console.log(stepSize, "inCounter");
-
   const dispatch = useDispatch();
 
   console.count("render component Counter");
